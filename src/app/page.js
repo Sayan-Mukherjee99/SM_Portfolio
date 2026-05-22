@@ -177,21 +177,25 @@ function MarqueeTape({ text, rotate = 0, color = 'bg-white' }) {
 }
 
 function RevealText({ text, className = '' }) {
-  const chars = text.split('');
+  const words = text.split(' ');
 
   return (
-    <span className={cn('inline-flex flex-wrap overflow-hidden', className)}>
-      {chars.map((char, i) => (
-        <motion.span
-          key={i}
-          initial={{ y: '100%' }}
-          whileInView={{ y: '0%' }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, delay: i * 0.03, ease: [0.33, 1, 0.68, 1] }}
-          className="inline-block"
-        >
-          {char === ' ' ? '\u00A0' : char}
-        </motion.span>
+    <span className={cn('inline-flex flex-wrap', className)}>
+      {words.map((word, wordIndex) => (
+        <span key={wordIndex} className="inline-block whitespace-nowrap overflow-hidden mr-[0.25em] last:mr-0 pr-1 pb-1">
+          {word.split('').map((char, charIndex) => (
+            <motion.span
+              key={charIndex}
+              initial={{ y: '100%' }}
+              whileInView={{ y: '0%' }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.5, delay: (wordIndex * 5 + charIndex) * 0.03, ease: [0.33, 1, 0.68, 1] }}
+              className="inline-block"
+            >
+              {char}
+            </motion.span>
+          ))}
+        </span>
       ))}
     </span>
   );
@@ -652,7 +656,7 @@ export default function PortfolioPage() {
         <div className="mx-auto max-w-7xl px-6">
           {/* Header */}
           <div className="mb-6">
-            <h2 className="text-5xl font-black uppercase tracking-tighter md:text-7xl">
+            <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter">
               <RevealText text="SELECTED WORK" />
             </h2>
           </div>
@@ -695,7 +699,7 @@ export default function PortfolioPage() {
         <div className="mx-auto max-w-7xl px-6">
           {/* Header */}
           <div className="mb-6">
-            <h2 className="text-5xl font-black uppercase tracking-tighter md:text-7xl">
+            <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter">
               <RevealText text="CERTIFICATIONS" />
             </h2>
           </div>
