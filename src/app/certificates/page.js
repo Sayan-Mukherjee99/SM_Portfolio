@@ -233,7 +233,7 @@ export default function CertificatesPage() {
         </div>
 
         <div className="mb-6">
-          <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter">
+          <h1 className="text-2xl xs:text-3xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter">
             <RevealText text="ALL CERTIFICATIONS" />
           </h1>
         </div>

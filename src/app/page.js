@@ -528,7 +528,7 @@ export default function PortfolioPage() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
-            className="mb-6 text-5xl font-black uppercase leading-[0.9] tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl space-x-2"
+            className="mb-6 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase leading-[0.9] tracking-tighter space-x-2"
           >
             <span className="inline-block bg-[#FFDC58] px-4 py-1 border-2 border-black">
               Sayan
@@ -543,7 +543,7 @@ export default function PortfolioPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.25 }}
-            className="mb-8 text-2xl font-black uppercase tracking-tight text-gray-900 md:text-3xl space-x-2"
+            className="mb-8 text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-gray-900 space-x-2"
           >
             <span className="inline-block bg-[#A388EE] px-3 py-0.5 text-white border-2 border-black">
               A
@@ -656,7 +656,7 @@ export default function PortfolioPage() {
         <div className="mx-auto max-w-7xl px-6">
           {/* Header */}
           <div className="mb-6">
-            <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter">
+            <h2 className="text-2xl xs:text-3xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter">
               <RevealText text="SELECTED WORK" />
             </h2>
           </div>
@@ -699,7 +699,7 @@ export default function PortfolioPage() {
         <div className="mx-auto max-w-7xl px-6">
           {/* Header */}
           <div className="mb-6">
-            <h2 className="text-3xl xs:text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter">
+            <h2 className="text-2xl xs:text-3xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter">
               <RevealText text="CERTIFICATIONS" />
             </h2>
           </div>
@@ -788,7 +788,7 @@ export default function PortfolioPage() {
       {/* ── FAQ Section ── */}
       <section className="border-t-2 border-black bg-white py-24">
         <div className="mx-auto max-w-4xl px-6">
-          <h2 className="mb-16 border-b-8 border-black pb-6 text-7xl font-black uppercase tracking-tighter md:text-9xl">
+          <h2 className="mb-16 border-b-8 border-black pb-6 text-4xl sm:text-7xl md:text-9xl font-black uppercase tracking-tighter">
             F.A.Q.
           </h2>
 
@@ -812,7 +812,7 @@ export default function PortfolioPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="mb-10 text-5xl font-black uppercase leading-[0.95] tracking-tighter md:text-7xl"
+            className="mb-10 text-4xl sm:text-5xl md:text-7xl font-black uppercase leading-[0.95] tracking-tighter"
           >
             Contact Me
           </motion.h2>
