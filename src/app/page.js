@@ -392,7 +392,7 @@ export default function PortfolioPage() {
       demoVideoUrl: '/projects/Codalyte.mov',
     },
     {
-      title: 'Health Tracker',
+      title: 'HealthTrack+',
       category: 'Healthcare System',
       image: '/projects/health-tracker.png',
       color: 'bg-[#FFDC58]',

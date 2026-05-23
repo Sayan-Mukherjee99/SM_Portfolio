@@ -202,7 +202,7 @@ export default function ProjectsPage() {
       demoVideoUrl: '/projects/Codalyte.mov',
     },
     {
-      title: 'Health Tracker',
+      title: 'HealthTrack+',
       category: 'Healthcare System',
       description: 'A modern, high-performance mobile health tracking dashboard designed to aggregate and visualize daily steps, heart rates, workouts, and calories in real time.',
       techStack: ["Kotlin", "Jetpack Compose", "Android SDK", "Room Database", "Hilt"],

@@ -21,7 +21,7 @@ export const projectsData = [
   },
   {
     id: "project-3",
-    title: "Health Tracker",
+    title: "HealthTrack+",
     description: "A modern, high-performance mobile health tracking dashboard designed to aggregate and visualize daily steps, heart rates, workouts, and calories in real time.",
     techStack: ["Kotlin", "Jetpack Compose", "Android SDK", "Room Database", "Hilt"],
     imagePath: "/projects/health-tracker.png",
