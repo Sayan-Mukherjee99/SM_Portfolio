@@ -23,6 +23,8 @@ import { cn } from '@/lib/utils';
 import InterstellarFluidBackground from '@/components/InterstellarFluidBackground';
 import AssigneeDropdown from '@/components/AssigneeDropdown';
 import { certificatesData } from '@/data/portfolioData';
+import StarBorder from '@/components/ui/StarBorder';
+import SplashLoader from '@/components/SplashLoader';
 
 
 const MotionLink = motion(Link);
@@ -430,6 +432,7 @@ export default function PortfolioPage() {
   ];
 
   return (
+    <SplashLoader>
     <div className="relative min-h-screen bg-[#FDFBF7] font-sans text-black selection:bg-[#FFDC58]">
       <InterstellarFluidBackground />
 
@@ -682,14 +685,18 @@ export default function PortfolioPage() {
 
           {/* View All Projects Button */}
           <div className="mt-16 text-center">
-            <MotionLink
+            <StarBorder
+              as="a"
               href="/projects"
-              whileHover={{ y: -2, x: -2 }}
-              whileTap={{ y: 0, x: 0 }}
-              className="inline-flex items-center gap-2 border-2 border-black bg-[#A388EE] px-8 py-4 text-lg font-bold uppercase tracking-wider text-black shadow-[6px_6px_0px_0px_#000] cursor-pointer hover:bg-[#8e6fed] transition-all"
+              color="cyan"
+              speed="5s"
+              thickness={3}
+              className="cursor-pointer"
             >
-              View All Projects <ArrowUpRight size={20} />
-            </MotionLink>
+              <span className="inline-flex items-center gap-2 font-bold uppercase tracking-wider text-white text-lg">
+                View All Projects <ArrowUpRight size={20} />
+              </span>
+            </StarBorder>
           </div>
         </div>
       </section>
@@ -727,14 +734,18 @@ export default function PortfolioPage() {
 
           {/* View All Certificates Button */}
           <div className="mt-16 text-center">
-            <MotionLink
+            <StarBorder
+              as="a"
               href="/certificates"
-              whileHover={{ y: -2, x: -2 }}
-              whileTap={{ y: 0, x: 0 }}
-              className="inline-flex items-center gap-2 border-2 border-black bg-[#A388EE] px-8 py-4 text-lg font-bold uppercase tracking-wider text-black shadow-[6px_6px_0px_0px_#000] cursor-pointer hover:bg-[#8e6fed] transition-all"
+              color="#A388EE"
+              speed="5s"
+              thickness={3}
+              className="cursor-pointer"
             >
-              View All Certificates <ArrowUpRight size={20} />
-            </MotionLink>
+              <span className="inline-flex items-center gap-2 font-bold uppercase tracking-wider text-white text-lg">
+                View All Certificates <ArrowUpRight size={20} />
+              </span>
+            </StarBorder>
           </div>
         </div>
       </section>
@@ -817,24 +828,34 @@ export default function PortfolioPage() {
             Contact Me
           </motion.h2>
           <div className="flex flex-wrap items-center justify-center gap-6">
-            <a href="https://github.com/Sayan-Mukherjee99" target="_blank" rel="noopener noreferrer">
-              <NeoButton
-                color="bg-white"
-                shadow="shadow-[6px_6px_0px_0px_#000]"
-                className="text-lg"
-              >
+            <StarBorder
+              as="a"
+              href="https://github.com/Sayan-Mukherjee99"
+              target="_blank"
+              rel="noopener noreferrer"
+              color="#4ade80"
+              speed="4s"
+              thickness={3}
+              className="cursor-pointer"
+            >
+              <span className="inline-flex items-center gap-2 font-bold uppercase tracking-wider text-white text-lg">
                 GitHub <ArrowUpRight size={20} />
-              </NeoButton>
-            </a>
-            <a href="#" target="_blank" rel="noopener noreferrer">
-              <NeoButton
-                color="bg-[#FF90E8]"
-                shadow="shadow-[6px_6px_0px_0px_#000]"
-                className="text-lg"
-              >
+              </span>
+            </StarBorder>
+            <StarBorder
+              as="a"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              color="#FF90E8"
+              speed="4s"
+              thickness={3}
+              className="cursor-pointer"
+            >
+              <span className="inline-flex items-center gap-2 font-bold uppercase tracking-wider text-white text-lg">
                 LinkedIn <ArrowUpRight size={20} />
-              </NeoButton>
-            </a>
+              </span>
+            </StarBorder>
           </div>
         </div>
       </section>
@@ -938,5 +959,6 @@ export default function PortfolioPage() {
         )}
       </AnimatePresence>
     </div>
+    </SplashLoader>
   );
 }
