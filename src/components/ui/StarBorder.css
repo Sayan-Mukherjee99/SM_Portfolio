@@ -62,3 +62,31 @@
     opacity: 0;
   }
 }
+
+/* Explore Projects Highlighted Button Override */
+.explore-projects-btn {
+  box-shadow: 0 0 20px rgba(163, 136, 238, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.3s ease !important;
+}
+
+.explore-projects-btn .inner-content {
+  background: #A388EE !important;
+  color: #000000 !important;
+  border-color: #A388EE !important;
+  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease !important;
+}
+
+.explore-projects-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 30px rgba(163, 136, 238, 0.6);
+}
+
+.explore-projects-btn:hover .inner-content {
+  background: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+.explore-projects-btn:active {
+  transform: scale(0.98);
+}
+

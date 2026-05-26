@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
       className={`${outfit.variable} ${spaceMono.variable} scroll-smooth`}
       suppressHydrationWarning
     >
-      <body className="antialiased min-h-screen bg-[#050508] text-gray-100 selection:bg-neon-purple selection:text-black">
+      <body className="antialiased min-h-screen bg-[#FDFBF7] text-black selection:bg-[#FFDC58]">
         <script
           dangerouslySetInnerHTML={{
             __html: `
