@@ -245,3 +245,12 @@ body {
   80%  { filter: hue-rotate(-45deg); }
   100% { filter: hue-rotate(0deg); }
 }
+
+/* Splash Loader session overrides */
+.splash-hidden .splash-loader {
+  display: none !important;
+}
+.splash-hidden .splash-content {
+  opacity: 1 !important;
+  transform: none !important;
+}

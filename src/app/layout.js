@@ -31,8 +31,20 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       className={`${outfit.variable} ${spaceMono.variable} scroll-smooth`}
+      suppressHydrationWarning
     >
       <body className="antialiased min-h-screen bg-[#050508] text-gray-100 selection:bg-neon-purple selection:text-black">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (sessionStorage.getItem('splashShown') === 'true') {
+                  document.documentElement.classList.add('splash-hidden');
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
         {children}
       </body>
     </html>

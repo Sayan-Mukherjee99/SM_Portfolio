@@ -7,10 +7,15 @@ export default function SplashLoader({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    if (sessionStorage.getItem('splashShown')) {
       setLoading(false);
-    }, 2800);
-    return () => clearTimeout(timer);
+    } else {
+      const timer = setTimeout(() => {
+        setLoading(false);
+        sessionStorage.setItem('splashShown', 'true');
+      }, 2800);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   return (
@@ -22,7 +27,7 @@ export default function SplashLoader({ children }) {
             initial={{ opacity: 1 }}
             exit={{ opacity: 0, scale: 1.05 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black"
+            className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black splash-loader"
           >
             {/* Ambient Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-64 w-64 rounded-full bg-[#A388EE]/20 blur-[100px] animate-pulse" />
@@ -70,6 +75,7 @@ export default function SplashLoader({ children }) {
       </AnimatePresence>
 
       <motion.div
+        className="splash-content"
         initial={{ opacity: 0 }}
         animate={{ opacity: loading ? 0 : 1 }}
         transition={{ duration: 0.5, delay: 0.1 }}
