@@ -255,74 +255,47 @@ const getProjectIcon = (title) => {
   return <Calendar className="text-[#A388EE] w-8 h-8 animate-pulse" />;
 };
 
-function WorkCard({ title, category, image, description, techStack, index, demoVideoUrl, onVideoClick }) {
-  const isVideo = demoVideoUrl?.toLowerCase().endsWith('.mp4') || demoVideoUrl?.toLowerCase().endsWith('.mov') || demoVideoUrl?.toLowerCase().endsWith('.webm');
-
-  const cardInner = (
-    <div className="relative w-full h-full overflow-hidden">
-      {/* Background Image */}
-      <img
-        src={image}
-        className="h-full w-full object-cover opacity-80 group-hover:opacity-40 group-hover:scale-105 transition-all duration-700 ease-out"
-        alt={title}
-      />
-
-      {/* Description block overlay on hover */}
-      <div className="absolute inset-x-6 top-6 bottom-24 flex flex-col justify-center items-center pointer-events-none text-center">
-        <div className="mb-2 opacity-0 group-hover:opacity-100 -translate-y-4 group-hover:translate-y-0 transition-all duration-500 ease-out">
-          {getProjectIcon(title)}
-        </div>
-        <p className="text-[11px] font-sans opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150 text-white/80 max-w-[95%] font-light leading-relaxed line-clamp-3">
-          {description}
-        </p>
-      </div>
-
-      {/* Glass Footer */}
-      <div className="absolute bottom-4 left-4 right-4 h-16 rounded-3xl bg-black/40 backdrop-blur-xl border border-white/10 flex items-center justify-between px-6 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] transition-all duration-300 group-hover:bg-black/60">
-        <div className="flex flex-col items-start text-left max-w-[60%]">
-          <span className="font-mono text-[9px] font-semibold uppercase tracking-widest text-[#A388EE]">
-            {category}
-          </span>
-          <span className="text-white text-sm font-bold tracking-tight line-clamp-1">
-            {title}
-          </span>
-        </div>
-        <span className="bg-white/10 group-hover:bg-white/20 text-white text-[10px] font-mono uppercase tracking-wider py-2 px-4 rounded-2xl transition-all active:scale-95 border border-white/5 whitespace-nowrap flex items-center gap-1.5">
-          {isVideo ? 'Watch Demo' : 'Visit Website'}
-          <ArrowUpRight size={12} className="text-white/60" />
-        </span>
-      </div>
-    </div>
-  );
-
-  if (isVideo) {
-    return (
-      <motion.button
-        onClick={() => onVideoClick(demoVideoUrl)}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.1 }}
-        transition={{ duration: 0.5, delay: index * 0.1 }}
-        className="group relative overflow-hidden rounded-[2rem] aspect-[4/3] bg-[#030305]/40 border border-white/10 shadow-lg w-full block text-left cursor-pointer hover:border-white/20 hover:shadow-[0_0_30px_rgba(163,136,238,0.15)] transition-all duration-300"
-      >
-        {cardInner}
-      </motion.button>
-    );
-  }
-
+function ProjectCard({ title, image, githubUrl, techStack, color, index }) {
   return (
-    <motion.a
-      href={demoVideoUrl}
+    <a
+      href={githubUrl}
       target="_blank"
       rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group relative overflow-hidden rounded-[2rem] aspect-[4/3] bg-[#030305]/40 border border-white/10 shadow-lg w-full block text-left cursor-pointer hover:border-white/20 hover:shadow-[0_0_30px_rgba(163,136,238,0.15)] transition-all duration-300"
+      className="block group cursor-pointer text-left w-full h-full"
     >
-      {cardInner}
-    </motion.a>
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.5, delay: index * 0.05 }}
+        className="border-2 border-black shadow-[4px_4px_0px_0px_#000] h-full bg-white flex flex-col"
+      >
+        {/* Project Image Thumbnail */}
+        <div className="aspect-[4/3] w-full overflow-hidden border-b-2 border-black bg-gray-100 relative">
+          <motion.img
+            src={image}
+            alt={title}
+            className="h-full w-full object-cover opacity-90 group-hover:scale-105 group-hover:opacity-100 transition-all duration-300"
+          />
+        </div>
+
+        <div className={cn('p-6 flex-1 flex flex-col justify-between min-h-[160px]', color)}>
+          <div>
+            <p className="mb-2 font-mono text-xs font-bold uppercase tracking-widest text-gray-700">
+              STACK // {techStack.slice(0, 3).join(' · ')}
+            </p>
+            <h3 className="text-xl font-black uppercase tracking-tight mb-4 text-black group-hover:underline line-clamp-2">
+              {title}
+            </h3>
+          </div>
+          <div>
+            <span className="inline-flex items-center gap-2 border-2 border-black bg-white px-4 py-2 font-bold uppercase tracking-wider text-black text-xs shadow-[2px_2px_0px_0px_#000] transition-all group-hover:translate-x-[-1px] group-hover:translate-y-[-1px] group-hover:shadow-[3px_3px_0px_0px_#000]">
+              View Source Code <ArrowUpRight size={14} />
+            </span>
+          </div>
+        </div>
+      </motion.div>
+    </a>
   );
 }
 
@@ -689,21 +662,22 @@ export default function PortfolioPage() {
             </span>
           </div>
 
-          {/* Work Cards */}
+          {/* Project Cards — same design as Certificate Cards */}
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {projectsData.map((project, i) => (
-              <WorkCard
-                key={project.id}
-                title={project.title}
-                category={project.subtitle}
-                image={project.imagePath}
-                description={project.description}
-                techStack={project.techStack}
-                index={i}
-                demoVideoUrl={project.demoVideoUrl}
-                onVideoClick={setActiveVideo}
-              />
-            ))}
+            {projectsData.map((project, i) => {
+              const cardColors = ['bg-[#FF90E8]', 'bg-[#9BF6FF]', 'bg-[#FFDC58]', 'bg-[#A388EE]'];
+              return (
+                <ProjectCard
+                  key={project.id}
+                  title={project.title}
+                  image={project.imagePath}
+                  githubUrl={project.githubUrl}
+                  techStack={project.techStack}
+                  color={cardColors[i % cardColors.length]}
+                  index={i}
+                />
+              );
+            })}
           </div>
 
           {/* Explore My Projects Button */}
