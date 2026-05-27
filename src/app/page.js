@@ -255,10 +255,13 @@ const getProjectIcon = (title) => {
   return <Calendar className="text-[#A388EE] w-8 h-8 animate-pulse" />;
 };
 
-function ProjectCard({ title, image, githubUrl, techStack, color, index }) {
+function ProjectCard({ title, image, demoVideoUrl, color, index }) {
+  const isVideo = demoVideoUrl?.toLowerCase().endsWith('.mp4') || demoVideoUrl?.toLowerCase().endsWith('.mov') || demoVideoUrl?.toLowerCase().endsWith('.webm');
+  const label = isVideo ? 'Watch Demo' : 'Visit Website';
+
   return (
     <a
-      href={githubUrl}
+      href={demoVideoUrl}
       target="_blank"
       rel="noopener noreferrer"
       className="block group cursor-pointer text-left w-full h-full"
@@ -281,16 +284,13 @@ function ProjectCard({ title, image, githubUrl, techStack, color, index }) {
 
         <div className={cn('p-6 flex-1 flex flex-col justify-between min-h-[160px]', color)}>
           <div>
-            <p className="mb-2 font-mono text-xs font-bold uppercase tracking-widest text-gray-700">
-              STACK // {techStack.slice(0, 3).join(' · ')}
-            </p>
             <h3 className="text-xl font-black uppercase tracking-tight mb-4 text-black group-hover:underline line-clamp-2">
               {title}
             </h3>
           </div>
           <div>
             <span className="inline-flex items-center gap-2 border-2 border-black bg-white px-4 py-2 font-bold uppercase tracking-wider text-black text-xs shadow-[2px_2px_0px_0px_#000] transition-all group-hover:translate-x-[-1px] group-hover:translate-y-[-1px] group-hover:shadow-[3px_3px_0px_0px_#000]">
-              View Source Code <ArrowUpRight size={14} />
+              {label} <ArrowUpRight size={14} />
             </span>
           </div>
         </div>
@@ -671,8 +671,7 @@ export default function PortfolioPage() {
                   key={project.id}
                   title={project.title}
                   image={project.imagePath}
-                  githubUrl={project.githubUrl}
-                  techStack={project.techStack}
+                  demoVideoUrl={project.demoVideoUrl}
                   color={cardColors[i % cardColors.length]}
                   index={i}
                 />
