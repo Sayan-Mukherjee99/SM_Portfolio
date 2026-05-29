@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, AnimatePresence, useSpring } from 'framer-motion';
 import { ArrowUpRight, ArrowLeft, X, Smartphone, Code, Heart, Calendar, Home, Menu } from 'lucide-react';
@@ -132,6 +132,13 @@ function RevealText({ text, className = '' }) {
 export default function ProjectsPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeVideo, setActiveVideo] = useState(null);
+  const videoModalRef = useRef(null);
+  const handleVideoClose = useCallback(() => setActiveVideo(null), []);
+
+  useEffect(() => {
+    if (activeVideo) videoModalRef.current?.focus();
+  }, [activeVideo]);
+
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -293,11 +300,17 @@ export default function ProjectsPage() {
       <AnimatePresence>
         {activeVideo && (
           <motion.div
+            ref={videoModalRef}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
-            onClick={() => setActiveVideo(null)}
+            onClick={handleVideoClose}
+            onKeyDown={(e) => e.key === 'Escape' && handleVideoClose()}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Video demo player"
+            tabIndex={-1}
           >
             <motion.div
               initial={{ scale: 0.95, y: 20 }}
@@ -313,7 +326,8 @@ export default function ProjectsPage() {
                   // PLAYING_DEMO_REEL
                 </span>
                 <button
-                  onClick={() => setActiveVideo(null)}
+                  onClick={handleVideoClose}
+                  aria-label="Close video player"
                   className="border-2 border-black bg-[#FF90E8] p-1.5 font-black text-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
                 >
                   <X size={20} />

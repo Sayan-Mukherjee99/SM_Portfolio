@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import {
   motion,
@@ -126,6 +126,13 @@ function RevealText({ text, className = '' }) {
 export default function CertificatesPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeCert, setActiveCert] = useState(null);
+  const certModalRef = useRef(null);
+  const handleCertClose = useCallback(() => setActiveCert(null), []);
+
+  useEffect(() => {
+    if (activeCert) certModalRef.current?.focus();
+  }, [activeCert]);
+
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -274,11 +281,17 @@ export default function CertificatesPage() {
       <AnimatePresence>
         {activeCert && (
           <motion.div
+            ref={certModalRef}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
-            onClick={() => setActiveCert(null)}
+            onClick={handleCertClose}
+            onKeyDown={(e) => e.key === 'Escape' && handleCertClose()}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Certificate: ${activeCert.title}`}
+            tabIndex={-1}
           >
             <motion.div
               initial={{ scale: 0.95, y: 20 }}
@@ -294,7 +307,8 @@ export default function CertificatesPage() {
                   // CERTIFICATE: {activeCert.title}
                 </span>
                 <button
-                  onClick={() => setActiveCert(null)}
+                  onClick={handleCertClose}
+                  aria-label="Close certificate viewer"
                   className="border-2 border-black bg-[#FF90E8] p-1.5 font-black text-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
                 >
                   <X size={20} />

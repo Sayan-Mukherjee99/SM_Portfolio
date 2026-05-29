@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import {
   motion,
@@ -255,9 +255,52 @@ const getProjectIcon = (title) => {
   return <Calendar className="text-[#A388EE] w-8 h-8 animate-pulse" />;
 };
 
-function ProjectCard({ title, image, demoVideoUrl, color, index }) {
+function ProjectCard({ title, image, demoVideoUrl, color, index, onVideoClick }) {
   const isVideo = demoVideoUrl?.toLowerCase().endsWith('.mp4') || demoVideoUrl?.toLowerCase().endsWith('.mov') || demoVideoUrl?.toLowerCase().endsWith('.webm');
   const label = isVideo ? 'Watch Demo' : 'Visit Website';
+
+  const cardInner = (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5, delay: index * 0.05 }}
+      className="border-2 border-black shadow-[4px_4px_0px_0px_#000] h-full bg-white flex flex-col"
+    >
+      {/* Project Image Thumbnail */}
+      <div className="aspect-[4/3] w-full overflow-hidden border-b-2 border-black bg-gray-100 relative">
+        <motion.img
+          src={image}
+          alt={title}
+          className="h-full w-full object-cover opacity-90 group-hover:scale-105 group-hover:opacity-100 transition-all duration-300"
+        />
+      </div>
+
+      <div className={cn('p-6 flex-1 flex flex-col justify-between min-h-[160px]', color)}>
+        <div>
+          <h3 className="text-xl font-black uppercase tracking-tight mb-4 text-black group-hover:underline line-clamp-2">
+            {title}
+          </h3>
+        </div>
+        <div>
+          <span className="inline-flex items-center gap-2 border-2 border-black bg-white px-4 py-2 font-bold uppercase tracking-wider text-black text-xs shadow-[2px_2px_0px_0px_#000] transition-all group-hover:translate-x-[-1px] group-hover:translate-y-[-1px] group-hover:shadow-[3px_3px_0px_0px_#000]">
+            {label} <ArrowUpRight size={14} />
+          </span>
+        </div>
+      </div>
+    </motion.div>
+  );
+
+  if (isVideo) {
+    return (
+      <button
+        onClick={() => onVideoClick?.(demoVideoUrl)}
+        className="block group cursor-pointer text-left w-full h-full bg-transparent border-0 p-0"
+      >
+        {cardInner}
+      </button>
+    );
+  }
 
   return (
     <a
@@ -266,35 +309,7 @@ function ProjectCard({ title, image, demoVideoUrl, color, index }) {
       rel="noopener noreferrer"
       className="block group cursor-pointer text-left w-full h-full"
     >
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.5, delay: index * 0.05 }}
-        className="border-2 border-black shadow-[4px_4px_0px_0px_#000] h-full bg-white flex flex-col"
-      >
-        {/* Project Image Thumbnail */}
-        <div className="aspect-[4/3] w-full overflow-hidden border-b-2 border-black bg-gray-100 relative">
-          <motion.img
-            src={image}
-            alt={title}
-            className="h-full w-full object-cover opacity-90 group-hover:scale-105 group-hover:opacity-100 transition-all duration-300"
-          />
-        </div>
-
-        <div className={cn('p-6 flex-1 flex flex-col justify-between min-h-[160px]', color)}>
-          <div>
-            <h3 className="text-xl font-black uppercase tracking-tight mb-4 text-black group-hover:underline line-clamp-2">
-              {title}
-            </h3>
-          </div>
-          <div>
-            <span className="inline-flex items-center gap-2 border-2 border-black bg-white px-4 py-2 font-bold uppercase tracking-wider text-black text-xs shadow-[2px_2px_0px_0px_#000] transition-all group-hover:translate-x-[-1px] group-hover:translate-y-[-1px] group-hover:shadow-[3px_3px_0px_0px_#000]">
-              {label} <ArrowUpRight size={14} />
-            </span>
-          </div>
-        </div>
-      </motion.div>
+      {cardInner}
     </a>
   );
 }
@@ -308,7 +323,19 @@ export default function PortfolioPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeVideo, setActiveVideo] = useState(null);
   const [activeCert, setActiveCert] = useState(null);
-  const containerRef = useRef(null);
+  const videoModalRef = useRef(null);
+  const certModalRef = useRef(null);
+
+  const handleVideoClose = useCallback(() => setActiveVideo(null), []);
+  const handleCertClose = useCallback(() => setActiveCert(null), []);
+
+  useEffect(() => {
+    if (activeVideo) videoModalRef.current?.focus();
+  }, [activeVideo]);
+
+  useEffect(() => {
+    if (activeCert) certModalRef.current?.focus();
+  }, [activeCert]);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -674,6 +701,7 @@ export default function PortfolioPage() {
                   demoVideoUrl={project.demoVideoUrl}
                   color={cardColors[i % cardColors.length]}
                   index={i}
+                  onVideoClick={setActiveVideo}
                 />
               );
             })}
@@ -870,11 +898,17 @@ export default function PortfolioPage() {
       <AnimatePresence>
         {activeVideo && (
           <motion.div
+            ref={videoModalRef}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
-            onClick={() => setActiveVideo(null)}
+            onClick={handleVideoClose}
+            onKeyDown={(e) => e.key === 'Escape' && handleVideoClose()}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Video demo player"
+            tabIndex={-1}
           >
             <motion.div
               initial={{ scale: 0.95, y: 20 }}
@@ -890,7 +924,8 @@ export default function PortfolioPage() {
                   // PLAYING_DEMO_REEL
                 </span>
                 <button
-                  onClick={() => setActiveVideo(null)}
+                  onClick={handleVideoClose}
+                  aria-label="Close video player"
                   className="border-2 border-black bg-[#FF90E8] p-1.5 font-black text-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
                 >
                   <X size={20} />
@@ -915,11 +950,17 @@ export default function PortfolioPage() {
       <AnimatePresence>
         {activeCert && (
           <motion.div
+            ref={certModalRef}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
-            onClick={() => setActiveCert(null)}
+            onClick={handleCertClose}
+            onKeyDown={(e) => e.key === 'Escape' && handleCertClose()}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Certificate: ${activeCert.title}`}
+            tabIndex={-1}
           >
             <motion.div
               initial={{ scale: 0.95, y: 20 }}
@@ -935,7 +976,8 @@ export default function PortfolioPage() {
                   // CERTIFICATE: {activeCert.title}
                 </span>
                 <button
-                  onClick={() => setActiveCert(null)}
+                  onClick={handleCertClose}
+                  aria-label="Close certificate viewer"
                   className="border-2 border-black bg-[#FF90E8] p-1.5 font-black text-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
                 >
                   <X size={20} />
