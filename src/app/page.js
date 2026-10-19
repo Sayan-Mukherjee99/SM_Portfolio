@@ -30,6 +30,7 @@ import AssigneeDropdown from '@/components/AssigneeDropdown';
 import { certificatesData, projectsData } from '@/data/portfolioData';
 import StarBorder from '@/components/ui/StarBorder';
 import SplashLoader from '@/components/SplashLoader';
+import Hero from '@/components/Hero';
 
 
 const MotionLink = motion(Link);
@@ -129,57 +130,6 @@ function FeatureCard({ icon: Icon, title, description, color, index }) {
         {description}
       </p>
     </motion.div>
-  );
-}
-
-function FloatingShapes() {
-  const shapes = [
-    { className: 'top-20 left-10 h-16 w-16 bg-[#FF90E8] rotate-12', delay: 0 },
-    { className: 'top-40 right-20 h-12 w-12 bg-[#9BF6FF] -rotate-6', delay: 0.5 },
-    { className: 'bottom-40 left-1/4 h-20 w-20 bg-[#FFDC58] rotate-45', delay: 1 },
-    { className: 'top-1/3 right-1/3 h-10 w-10 bg-[#A388EE] -rotate-12', delay: 1.5 },
-  ];
-
-  return (
-    <>
-      {shapes.map((shape, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 0.6, scale: 1 }}
-          transition={{ delay: shape.delay, duration: 0.8, type: 'spring' }}
-          className={cn(
-            'absolute border-2 border-black shadow-[3px_3px_0px_0px_#000]',
-            shape.className
-          )}
-          style={{ zIndex: 0 }}
-        />
-      ))}
-    </>
-  );
-}
-
-function MarqueeTape({ text, rotate = 0, color = 'bg-white' }) {
-  return (
-    <div
-      className={cn(
-        'absolute left-0 right-0 z-20 overflow-hidden border-y-2 border-black py-3 font-mono font-bold uppercase tracking-widest text-black',
-        color
-      )}
-      style={{ transform: `rotate(${rotate}deg)` }}
-    >
-      <motion.div
-        animate={{ x: ['0%', '-50%'] }}
-        transition={{ repeat: Infinity, ease: 'linear', duration: 10 }}
-        className="flex whitespace-nowrap"
-      >
-        {Array.from({ length: 20 }).map((_, i) => (
-          <span key={i} className="mx-4 flex items-center gap-4">
-            {text} <Star size={16} fill="black" />
-          </span>
-        ))}
-      </motion.div>
-    </div>
   );
 }
 
@@ -536,116 +486,7 @@ export default function PortfolioPage() {
       </nav>
 
       {/* ── Hero Section ── */}
-      <section className="relative flex min-h-screen items-center justify-center overflow-hidden pt-20">
-        <FloatingShapes />
-
-        <div className="relative z-10 mx-auto max-w-7xl px-6 text-center">
-          {/* Greeting Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-8 inline-block border-2 border-black bg-[#FF90E8] px-4 py-2 font-mono font-bold shadow-[4px_4px_0px_0px_#000]"
-          >
-            Hi, I&apos;m
-          </motion.div>
-
-          {/* Name */}
-          <motion.h1
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            className="mb-6 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase leading-[0.9] tracking-tighter space-x-2"
-          >
-            <span className="inline-block bg-[#FFDC58] px-4 py-1 border-2 border-black">
-              Sayan
-            </span>{' '}
-            <span className="inline-block bg-[#FFDC58] px-4 py-1 border-2 border-black">
-              Mukherjee.
-            </span>
-          </motion.h1>
-
-          {/* Tagline */}
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.25 }}
-            className="mb-8 text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-gray-900 space-x-2"
-          >
-            <span className="inline-block bg-[#A388EE] px-3 py-0.5 text-white border-2 border-black">
-              A
-            </span>{' '}
-            <span className="inline-block bg-[#A388EE] px-3 py-0.5 text-white border-2 border-black">
-              Software
-            </span>{' '}
-            <span className="inline-block bg-[#A388EE] px-3 py-0.5 text-white border-2 border-black">
-              Engineer
-            </span>
-          </motion.h2>
-
-          {/* Bio */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.35 }}
-            className="mx-auto mb-10 max-w-2xl text-lg font-medium leading-relaxed text-gray-700"
-          >
-            <p>
-              I design and build complete, scalable applications. Combining a strong foundation in{' '}
-              <span className="inline-block bg-[#FF90E8] px-2 py-0.5 border-2 border-black font-black text-black rotate-[-1deg] mx-1">
-                Problem-Solving
-              </span>{' '}
-              with core technologies like{' '}
-              <span className="inline-block bg-[#9BF6FF] px-2 py-0.5 border-2 border-black font-black text-black rotate-[1deg] mx-1">
-                Python
-              </span>
-              ,{' '}
-              <span className="inline-block bg-[#9BF6FF] px-2 py-0.5 border-2 border-black font-black text-black rotate-[-1deg] mx-1">
-                Java
-              </span>
-              , and{' '}
-              <span className="inline-block bg-[#9BF6FF] px-2 py-0.5 border-2 border-black font-black text-black rotate-[1deg] mx-1">
-                SQL
-              </span>
-              , I focus on writing clean, highly efficient, and optimized code.
-            </p>
-          </motion.div>
-
-          {/* Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.45 }}
-            className="flex flex-wrap items-center justify-center gap-4"
-          >
-            <NeoButton
-              color="bg-[#A388EE]"
-              onClick={() => {
-                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              View Projects <ArrowUpRight size={18} />
-            </NeoButton>
-            <NeoButton
-              color="bg-[#FF90E8]"
-              onClick={() => {
-                document.getElementById('certificates')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              View Certificates <ArrowUpRight size={18} />
-            </NeoButton>
-          </motion.div>
-        </div>
-
-        {/* Marquee Tape */}
-        <div className="absolute bottom-12 left-0 right-0">
-          <MarqueeTape
-            text="PYTHON • JAVA • SQL • FULL STACK WEB DEV • REACT • NEXT.JS • PROBLEM SOLVER •"
-            rotate={-2}
-            color="bg-[#FFDC58]"
-          />
-        </div>
-      </section>
+      <Hero />
 
       {/* ── Feature Stack Section ── */}
       <section id="skills" className="border-t-2 border-black bg-white py-24">
