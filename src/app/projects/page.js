@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, AnimatePresence, useSpring } from 'framer-motion';
-import { ArrowUpRight, ArrowLeft, X, Smartphone, Code, Heart, Calendar, Home, Menu } from 'lucide-react';
+import { ArrowUpRight, ArrowLeft, X, Smartphone, Code, Heart, Calendar, Home, Menu, ShieldCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import InterstellarFluidBackground from '@/components/InterstellarFluidBackground';
 import AssigneeDropdown from '@/components/AssigneeDropdown';
@@ -17,6 +17,7 @@ const getProjectIcon = (title) => {
   if (t.includes('neeti')) return <Smartphone className="text-[#A388EE] w-8 h-8 animate-pulse" />;
   if (t.includes('codalyte')) return <Code className="text-[#A388EE] w-8 h-8 animate-pulse" />;
   if (t.includes('healthtrack')) return <Heart className="text-[#A388EE] w-8 h-8 animate-pulse" />;
+  if (t.includes('drishti') || t.includes('sentinel')) return <ShieldCheck className="text-[#A388EE] w-8 h-8 animate-pulse" />;
   return <Calendar className="text-[#A388EE] w-8 h-8 animate-pulse" />;
 };
 
@@ -183,6 +184,14 @@ export default function ProjectsPage() {
       techStack: ["React", "Next.js", "Framer Motion", "Tailwind CSS", "LocalStorage"],
       image: '/projects/study-flow.png',
       demoVideoUrl: '/projects/Study Flow.mp4',
+    },
+    {
+      title: 'Drishti AI',
+      category: 'Graph Risk Intelligence',
+      description: 'Defensive attack-path intelligence mapping real routes from the internet to crown-jewel assets, pricing blast radius in deterministic dollars, and synthesizing remediation playbooks.',
+      techStack: ["Python", "NetworkX", "Graph Theory", "React", "Ansible", "FastAPI"],
+      image: '/projects/drishti.png',
+      demoVideoUrl: 'https://net-sentinal-ai.vercel.app/',
     },
   ];
 

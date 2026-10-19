@@ -22,6 +22,7 @@ import {
   Code,
   Heart,
   Calendar,
+  ShieldCheck,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import InterstellarFluidBackground from '@/components/InterstellarFluidBackground';
@@ -252,6 +253,7 @@ const getProjectIcon = (title) => {
   if (t.includes('neeti')) return <Smartphone className="text-[#A388EE] w-8 h-8 animate-pulse" />;
   if (t.includes('codalyte')) return <Code className="text-[#A388EE] w-8 h-8 animate-pulse" />;
   if (t.includes('healthtrack')) return <Heart className="text-[#A388EE] w-8 h-8 animate-pulse" />;
+  if (t.includes('drishti') || t.includes('sentinel')) return <ShieldCheck className="text-[#A388EE] w-8 h-8 animate-pulse" />;
   return <Calendar className="text-[#A388EE] w-8 h-8 animate-pulse" />;
 };
 
@@ -690,7 +692,7 @@ export default function PortfolioPage() {
           </div>
 
           {/* Project Cards — same design as Certificate Cards */}
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {projectsData.map((project, i) => {
               const cardColors = ['bg-[#FF90E8]', 'bg-[#9BF6FF]', 'bg-[#FFDC58]', 'bg-[#A388EE]'];
               return (
