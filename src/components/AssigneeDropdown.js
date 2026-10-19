@@ -34,7 +34,7 @@ const contactLinks = [
   {
     id: 'linkedin',
     name: 'LinkedIn',
-    url: '#', // placeholder, user will provide later
+    url: 'https://www.linkedin.com/in/sayan-mukherjee-349818339',
     icon: LinkedinIcon,
     color: 'hover:bg-[#FF90E8]/20',
   }

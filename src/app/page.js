@@ -868,7 +868,7 @@ export default function PortfolioPage() {
             </StarBorder>
             <StarBorder
               as="a"
-              href="#"
+              href="https://www.linkedin.com/in/sayan-mukherjee-349818339"
               target="_blank"
               rel="noopener noreferrer"
               color="#FF90E8"
