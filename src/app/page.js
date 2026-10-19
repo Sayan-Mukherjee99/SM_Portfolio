@@ -692,8 +692,8 @@ export default function PortfolioPage() {
           </div>
 
           {/* Project Cards — same design as Certificate Cards */}
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {projectsData.map((project, i) => {
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {projectsData.slice(0, 4).map((project, i) => {
               const cardColors = ['bg-[#FF90E8]', 'bg-[#9BF6FF]', 'bg-[#FFDC58]', 'bg-[#A388EE]'];
               return (
                 <ProjectCard

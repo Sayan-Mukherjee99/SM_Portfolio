@@ -13,6 +13,19 @@ export const projectsData = [
     textColorClass: "text-neon-cyan",
   },
   {
+    id: "project-5",
+    title: "Drishti AI",
+    description: "Defensive attack-path intelligence mapping real routes from the internet to crown-jewel assets, pricing blast radius in deterministic dollars, and synthesizing remediation playbooks.",
+    techStack: ["Python", "NetworkX", "Graph Theory", "React", "Ansible", "FastAPI"],
+    imagePath: "/projects/drishti.png",
+    githubUrl: "https://github.com/Sayan-Mukherjee99",
+    demoVideoUrl: "https://net-sentinal-ai.vercel.app/",
+    technicalChallenge: "Calculating bounded Yen's K-shortest paths across dense high-cardinality network graphs in real time without high latency. Resolved with graph pruning and topology indexing.",
+    borderColorClass: "border-neon-cyan/40",
+    themeColor: "rgba(0, 240, 255, 0.4)",
+    textColorClass: "text-neon-cyan",
+  },
+  {
     id: "project-2",
     title: "Codalyte",
     description: "A lightweight, real-time code execution and collaborative editor platform featuring low-latency synchronizations and inline AST diagnostics.",
@@ -50,19 +63,6 @@ export const projectsData = [
     borderColorClass: "border-neon-yellow/40",
     themeColor: "rgba(255, 251, 0, 0.4)",
     textColorClass: "text-neon-yellow",
-  },
-  {
-    id: "project-5",
-    title: "Drishti AI",
-    description: "Defensive attack-path intelligence mapping real routes from the internet to crown-jewel assets, pricing blast radius in deterministic dollars, and synthesizing remediation playbooks.",
-    techStack: ["Python", "NetworkX", "Graph Theory", "React", "Ansible", "FastAPI"],
-    imagePath: "/projects/drishti.png",
-    githubUrl: "https://github.com/Sayan-Mukherjee99",
-    demoVideoUrl: "https://net-sentinal-ai.vercel.app/",
-    technicalChallenge: "Calculating bounded Yen's K-shortest paths across dense high-cardinality network graphs in real time without high latency. Resolved with graph pruning and topology indexing.",
-    borderColorClass: "border-neon-cyan/40",
-    themeColor: "rgba(0, 240, 255, 0.4)",
-    textColorClass: "text-neon-cyan",
   }
 ];
 

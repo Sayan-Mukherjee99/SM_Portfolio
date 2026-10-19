@@ -162,6 +162,14 @@ export default function ProjectsPage() {
       demoVideoUrl: '/projects/VID-20260411-WA0014.mp4',
     },
     {
+      title: 'Drishti AI',
+      category: 'Graph Risk Intelligence',
+      description: 'Defensive attack-path intelligence mapping real routes from the internet to crown-jewel assets, pricing blast radius in deterministic dollars, and synthesizing remediation playbooks.',
+      techStack: ["Python", "NetworkX", "Graph Theory", "React", "Ansible", "FastAPI"],
+      image: '/projects/drishti.png',
+      demoVideoUrl: 'https://net-sentinal-ai.vercel.app/',
+    },
+    {
       title: 'Codalyte',
       category: 'Developer Tooling',
       description: 'A lightweight, real-time code execution and collaborative editor platform featuring low-latency synchronizations and inline AST diagnostics.',
@@ -184,14 +192,6 @@ export default function ProjectsPage() {
       techStack: ["React", "Next.js", "Framer Motion", "Tailwind CSS", "LocalStorage"],
       image: '/projects/study-flow.png',
       demoVideoUrl: '/projects/Study Flow.mp4',
-    },
-    {
-      title: 'Drishti AI',
-      category: 'Graph Risk Intelligence',
-      description: 'Defensive attack-path intelligence mapping real routes from the internet to crown-jewel assets, pricing blast radius in deterministic dollars, and synthesizing remediation playbooks.',
-      techStack: ["Python", "NetworkX", "Graph Theory", "React", "Ansible", "FastAPI"],
-      image: '/projects/drishti.png',
-      demoVideoUrl: 'https://net-sentinal-ai.vercel.app/',
     },
   ];
 
